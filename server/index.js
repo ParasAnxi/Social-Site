@@ -1,7 +1,9 @@
-import express from "express"**;
+//1st part start
+import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -34,3 +36,16 @@ const storage = multer.diskStorage({
         cb(null,file.originalname);
     }
 });
+//use upload to upload
+const upload = multer({ storage });
+
+//setting up mongoose
+
+const PORT = process.env.PORT || 6001; //backup
+mongoose.set('strictQuery', true);
+mongoose.connect(process.env.MONGO_URL,{
+    useNewURLParser: true,
+    useUnifiedTopology: true,
+}).then(()=>{
+    app.listen(PORT, ()=>console.log(`Server Port : ${PORT}`));
+}).catch((error) => console.log(`${error} did not connect`));
