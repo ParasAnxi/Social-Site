@@ -38,6 +38,6 @@ const UserSchema = new mongoose.Schema(
         impressions: Number,
         
     },{ timestamps: true });
-
+    //db c
     const User= mongoose.model("User", UserSchema);
     export default User;
