@@ -10,6 +10,9 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url"; //set the path when we configure directry
 
+//step 3 creating route
+
+import authRoutes from "./routes/auth.js";
 //step 2 imports
 
 import {register} from "./controllers/auth.js";
@@ -54,6 +57,9 @@ const upload = multer({ storage });
 
 app.post("/auth/register",upload.single("picture"),register);
 
+//step 3 routes
+
+app.use("./auth",authRoutes);
 
 //setting up mongoose
 

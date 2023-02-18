@@ -22,3 +22,21 @@ const{
         res.status(500).json({ error: err.message});
     }
 };
+
+//step 4 login
+
+export const login = async ( req, res)=>{
+    try{
+        const {email , password} = req.body;
+        const user = await User.findOne( { email : email});
+        if(!user) return res.status(400).json({msg: "user does not exist"});
+
+        const isMatch= await bcrytp.compare(password,user.password);
+        if(!isMatch) return res.status(400).json({msg: "Invaild credentials."});
+        const token = jwt.sign({id : user._id},process.env.JWT_SECRET);
+        delete super.password;
+        res.status(200).json({token,user});
+    }catch(err){
+        res.status(500).json({error: err.message});
+    }
+};
