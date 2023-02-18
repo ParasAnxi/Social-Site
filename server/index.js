@@ -15,6 +15,7 @@ import { fileURLToPath } from "url"; //set the path when we configure directry
 import authRoutes from "./routes/auth.js";
 //step 2 imports
 
+import userRoutes from "./routes/users.js";
 import {register} from "./controllers/auth.js";
 
 //configuration
@@ -61,6 +62,8 @@ app.post("/auth/register",upload.single("picture"),register);
 
 app.use("./auth",authRoutes);
 
+// step 7 usser routes
+app.use.use("users",userRoutes);
 //setting up mongoose
 
 const PORT = process.env.PORT || 6001; //backup
